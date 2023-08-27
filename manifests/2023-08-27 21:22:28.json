@@ -1,0 +1,33 @@
+{
+  "builds": [
+    {
+      "name": "this",
+      "builder_type": "vsphere-iso",
+      "files": null,
+      "artifact_id": "linux-ubuntu-23.04-main",
+      "packer_run_uuid": "ca2ccb77-30b6-7ca5-a1a6-69bedf3c2522",
+      "custom_data": {
+        "ansible_username": "michael",
+        "build_date": "2023-08-27 21:22 UTC",
+        "build_username": "michael",
+        "build_version": "main",
+        "common_data_source": "http",
+        "common_vm_version": "20",
+        "vm_cpu_cores": "1",
+        "vm_cpu_count": "2",
+        "vm_disk_size": "40960",
+        "vm_disk_thin_provisioned": "true",
+        "vm_firmware": "efi-secure",
+        "vm_guest_os_type": "ubuntu64Guest",
+        "vm_mem_size": "2048",
+        "vm_network_card": "vmxnet3",
+        "vsphere_cluster": "EdelCluster",
+        "vsphere_datacenter": "EdelHome",
+        "vsphere_datastore": "Datastore003001",
+        "vsphere_endpoint": "lvm-013.home.edel.host",
+        "vsphere_folder": "lvm-013-templates"
+      }
+    }
+  ],
+  "last_run_uuid": "ca2ccb77-30b6-7ca5-a1a6-69bedf3c2522"
+}

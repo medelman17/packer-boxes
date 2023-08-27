@@ -1,0 +1,18 @@
+/*
+    DESCRIPTION:
+    VMware vSphere variables used for all builds.
+    - Variables are use by the source blocks.
+*/
+
+// vSphere Credentials
+vsphere_endpoint            = "host"
+vsphere_username            = "user"
+vsphere_password            = "password"
+vsphere_insecure_connection = true
+
+// vSphere Settings
+vsphere_datacenter = "EdelHome"
+vsphere_cluster    = "EdelCluster"
+vsphere_datastore  = "Datastore003001"
+vsphere_network    = "DPortGroup-DEFAULT"
+vsphere_folder     = "lvm-013-templates"
