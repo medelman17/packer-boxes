@@ -1,5 +1,4 @@
 # Packer variable files
-*.pkrvars.hcl
 **/packer_cache/*
 
 # Local .terraform directories
@@ -36,3 +35,5 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+config
