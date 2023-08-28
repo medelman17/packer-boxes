@@ -42,5 +42,8 @@
       ethernets:
         ens33:
           dhcp4: true
+          nameservers: 
+            search: [home.edel.host]
+            addresses: [172.16.0.17, 172.16.0.28]
     EOF
     sudo netplan apply

@@ -13,9 +13,11 @@ follow_link() {
 
 SCRIPT_PATH=$(realpath "$(dirname "$(follow_link "$0")")")
 CONFIG_PATH=$(realpath "${1:-${SCRIPT_PATH}/config}")
-INPUT_PATH="$SCRIPT_PATH"/builds/linux/ubuntu/23.04/
+INPUT_PATH="$SCRIPT_PATH"/builds/linux/photon/5.0/
 
-echo "Building a Ubuntu Server 23.04 Template for VMware vSphere..."
+echo "Building a Photon 5.0 Template for VMware vSphere..."
+
+# echo "Building a Ubuntu Server 23.04 Template for VMware vSphere..."
 
 ### Initialize HashiCorp Packer and required plugins. ###
 echo "Initializing HashiCorp Packer and required plugins..."
