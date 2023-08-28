@@ -26,10 +26,9 @@ vm_disk_size             = 40960
 vm_disk_controller_type  = ["pvscsi"]
 vm_disk_thin_provisioned = true
 vm_network_card          = "vmxnet3"
-
 // Removable Media Settings
-
-iso_url      = "https://releases.ubuntu.com/releases/23.04/ubuntu-23.04-live-server-amd64.iso"
+iso_path           = "linux/ubuntu/23.04"
+iso_file           = "ubuntu-23.04-live-server-amd64.iso"
 iso_checksum_type  = "sha256"
 iso_checksum_value = "c7cda48494a6d7d9665964388a3fc9c824b3bef0c9ea3818a1be982bc80d346b"
 

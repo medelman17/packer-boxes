@@ -229,20 +229,20 @@ variable "common_iso_datastore" {
   description = "The name of the source vSphere datastore for ISO images. (e.g. 'sfo-w01-cl01-nfs01')"
 }
 
-# variable "iso_path" {
-#   type        = string
-#   description = "The path on the source vSphere datastore for ISO image. (e.g. 'iso/linux/ubuntu')"
-# }
+variable "iso_path" {
+  type        = string
+  description = "The path on the source vSphere datastore for ISO image. (e.g. 'iso/linux/ubuntu')"
+}
 
-# variable "iso_file" {
-#   type        = string
-#   description = "The file name of the ISO image used by the vendor. (e.g. 'ubuntu-<version>-live-server-amd64.iso')"
-# }
-
-variable "iso_url" {
+variable "iso_file" {
   type        = string
   description = "The file name of the ISO image used by the vendor. (e.g. 'ubuntu-<version>-live-server-amd64.iso')"
 }
+
+# variable "iso_url" {
+#   type        = string
+#   description = "The file name of the ISO image used by the vendor. (e.g. 'ubuntu-<version>-live-server-amd64.iso')"
+# }
 
 variable "iso_checksum_type" {
   type        = string

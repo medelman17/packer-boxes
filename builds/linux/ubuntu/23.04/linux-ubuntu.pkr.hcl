@@ -15,6 +15,10 @@ packer {
       version = "0.14.3"
       source  = "github.com/rgl/windows-update"
     }
+    ansible = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/ansible"
+    }
   }
 }
 
@@ -34,7 +38,8 @@ locals {
   build_date        = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   build_version     = data.git-repository.cwd.head
   build_description = "Version: ${local.build_version}\nBuilt on: ${local.build_date}\n${local.build_by}"
-  iso_url           = "${var.iso_url}"
+  iso_paths         = ["[${var.common_iso_datastore}] ${var.iso_path}/${var.iso_file}"]
+  iso_checksum      = "${var.iso_checksum_type}:${var.iso_checksum_value}"
   manifest_date     = formatdate("YYYY-MM-DD hh:mm:ss", timestamp())
   manifest_path     = "${path.cwd}/manifests/"
   manifest_output   = "${local.manifest_path}${local.manifest_date}.json"
@@ -94,8 +99,8 @@ source "vsphere-iso" "this" {
 
 // Removable Media Settings
 
-  iso_url      = "https://releases.ubuntu.com/releases/23.04/ubuntu-23.04-live-server-amd64.iso"
-  iso_checksum = "c7cda48494a6d7d9665964388a3fc9c824b3bef0c9ea3818a1be982bc80d346b"
+  iso_paths    = local.iso_paths
+  # iso_checksum = local.iso_checksum
   http_content = var.common_data_source == "http" ? local.data_source_content : null
   cd_content   = var.common_data_source == "disk" ? local.data_source_content : null
   cd_label     = var.common_data_source == "disk" ? "cidata" : null
@@ -166,6 +171,24 @@ build {
   provisioner "shell-local" {
     inline = ["echo the address is: $PACKER_HTTP_ADDR and build name is: $PACKER_BUILD_NAME"]
   }
+
+   provisioner "ansible" {
+    user                   = var.build_username
+    galaxy_file            = "${path.cwd}/ansible/requirements.yml"
+    galaxy_force_with_deps = true
+    playbook_file          = "${path.cwd}/ansible/main.yml"
+    roles_path             = "${path.cwd}/ansible/roles"
+    ansible_env_vars = [
+      "ANSIBLE_CONFIG=${path.cwd}/ansible/ansible.cfg"
+    ]
+    extra_arguments = [
+      "--extra-vars", "display_skipped_hosts=false",
+      "--extra-vars", "BUILD_USERNAME=${var.build_username}",
+      "--extra-vars", "BUILD_SECRET='${var.build_key}'",
+      "--extra-vars", "ANSIBLE_USERNAME=${var.ansible_username}",
+      "--extra-vars", "ANSIBLE_SECRET='${var.ansible_key}'",
+    ]
+  }    
 
   post-processor "manifest" {
     output     = local.manifest_output
